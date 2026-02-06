@@ -58,6 +58,7 @@
     }
     input{min-width:260px;}
     textarea{width:100%; resize:vertical; min-height:90px; border-radius:16px;}
+
     .btn{
       border:0; padding:10px 14px; border-radius:14px;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
@@ -70,6 +71,14 @@
     }
     .btn.danger{background: linear-gradient(135deg, #fb7185, #ef4444);}
     .btn.ok{background: linear-gradient(135deg, #34d399, #22c55e);}
+    .btn.small{
+      padding:7px 10px;
+      border-radius:12px;
+      font-weight:800;
+      font-size:12px;
+      box-shadow: none;
+    }
+
     main .grid{
       max-width:1200px; margin:0 auto; padding:16px;
       display:grid; grid-template-columns: 420px 1fr; gap:14px;
@@ -98,11 +107,11 @@
       border:1px solid var(--line);
       border-radius:16px;
       padding:10px 12px;
-      cursor:pointer;
       background:#fff;
       transition: transform .06s ease, box-shadow .12s ease;
     }
-    .item:hover{transform: translateY(-1px); box-shadow: 0 10px 22px rgba(12,34,56,.08);}
+    .item.clickable{cursor:pointer;}
+    .item.clickable:hover{transform: translateY(-1px); box-shadow: 0 10px 22px rgba(12,34,56,.08);}
     .item.active{outline: 3px solid rgba(76,201,240,.35);}
     .item .name{font-weight:900;}
     .pill{
@@ -129,6 +138,7 @@
     .hr{height:1px; background:var(--line); margin:10px 0;}
     .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
     .right{margin-left:auto}
+
     .toast{
       position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px;
       background: rgba(12,34,56,.92);
@@ -171,7 +181,6 @@
 
       <div class="controls">
         <select id="turmaSelect"></select>
-
         <input id="searchInput" placeholder="Pesquisar por nome ou número (coluna B)..." />
 
         <label class="muted" style="display:flex;gap:8px;align-items:center;user-select:none;">
@@ -212,7 +221,6 @@
         </div>
 
         <div id="detail" style="display:none">
-
           <div class="row">
             <div>
               <div style="font-size:18px;font-weight:1000" id="d_nome">—</div>
@@ -264,7 +272,6 @@
           <div class="hr"></div>
 
           <div id="obsList" class="list" style="max-height:320px"></div>
-
         </div>
       </div>
     </section>
@@ -337,7 +344,7 @@
     setTimeout(()=> toast.style.display = 'none', 2600);
   }
 
-  // ✅ API blindada (evita redirect/CORS chato do Apps Script)
+  // ✅ API blindada (evita CORS/redirect chato do Apps Script)
   async function api(action, data = {}){
     const payload = { action, ...data };
 
@@ -400,7 +407,7 @@
     }
     for (const a of list){
       const div = document.createElement('div');
-      div.className = 'item';
+      div.className = 'item clickable';
       div.innerHTML = `
         <div class="name">${escapeHtml(a.nome || 'Sem nome')}</div>
         <div class="muted">Nº: <b>${escapeHtml(a.num)}</b></div>
@@ -433,8 +440,6 @@
 
     d_inep.textContent = a.inep || '—';
     d_cpf.textContent = a.cpf || '—';
-
-    // ✅ AQUI: já vem do GS em PT-BR (dd/MM/aaaa). Se vier ISO, converte.
     d_matricula.textContent = formatDateBR(a.dataMatricula);
 
     d_idade.textContent = a.idade || '—';
@@ -527,24 +532,93 @@
     }
   }
 
+  // ✅ Agora: data em PT-BR + texto em negrito + botão editar
   function renderObs(obs){
     obsList.innerHTML = "";
     if (!obs.length){
       obsList.innerHTML = `<div class="muted">Sem observações ainda. ✨</div>`;
       return;
     }
+
     for (const o of obs){
       const div = document.createElement('div');
       div.className = 'item';
+
+      const dataBR = formatObsDateBR(o.dataObs);
       const ts = new Date(o.timestamp || '');
-      div.innerHTML = `
-        <div class="name">📅 ${escapeHtml(o.dataObs || '')} <span class="muted">• ${escapeHtml(o.turma || '')}</span></div>
-        <div class="muted" style="margin-top:6px">${escapeHtml(o.texto || '')}</div>
-        <div class="muted" style="margin-top:8px;font-size:12px">Registrado em: ${
-          isNaN(ts.getTime()) ? '—' : ts.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
-        }</div>
-      `;
+
+      // topo com data em PT-BR (sem inglês)
+      const top = document.createElement('div');
+      top.className = 'name';
+      top.innerHTML = `📅 ${escapeHtml(dataBR)} <span class="muted">• ${escapeHtml(o.turma || '')}</span>`;
+
+      // texto em negrito
+      const txt = document.createElement('div');
+      txt.style.marginTop = '6px';
+      txt.style.fontWeight = '900';
+      txt.textContent = (o.texto || '');
+
+      const meta = document.createElement('div');
+      meta.className = 'muted';
+      meta.style.marginTop = '8px';
+      meta.style.fontSize = '12px';
+      meta.textContent = `Registrado em: ${isNaN(ts.getTime()) ? '—' : ts.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}`;
+
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.style.marginTop = '10px';
+
+      const btnEdit = document.createElement('button');
+      btnEdit.className = 'btn ghost small';
+      btnEdit.textContent = '✏️ Editar';
+      btnEdit.onclick = () => editObs(o);
+
+      row.appendChild(btnEdit);
+
+      div.appendChild(top);
+      div.appendChild(txt);
+      div.appendChild(meta);
+      div.appendChild(row);
+
       obsList.appendChild(div);
+    }
+  }
+
+  // ✅ Editar observação (corrigir data/texto)
+  async function editObs(o){
+    if (!o || !o.id){
+      notify("Não achei o ID da observação para editar.");
+      return;
+    }
+
+    const dataAtual = formatObsDateBR(o.dataObs);
+    const novaData = prompt("Editar data (dd/mm/aaaa):", dataAtual);
+    if (novaData === null) return;
+
+    const novoTexto = prompt("Editar texto da observação:", o.texto || "");
+    if (novoTexto === null) return;
+
+    const d = (novaData || '').trim();
+    const t = (novoTexto || '').trim();
+
+    if (!d || !t){
+      notify("Data e texto não podem ficar vazios.");
+      return;
+    }
+
+    setLoading(true);
+    try{
+      await api('editarObservacao', {
+        id: o.id,
+        dataObs: d,
+        texto: t
+      });
+      notify("Observação editada ✅");
+      await loadObs();
+    }catch(e){
+      notify("Erro: " + e.message);
+    }finally{
+      setLoading(false);
     }
   }
 
@@ -594,7 +668,7 @@
     }
   }
 
-  // Busca local + busca global (server) para pegar aluno de outra turma
+  // Busca local + global
   let searchTimer = null;
   function onSearch(){
     clearTimeout(searchTimer);
@@ -655,18 +729,31 @@
     }
   }
 
+  // --- formatos ---
   function formatDateBR(value){
     if (!value) return '—';
-
-    // Se já vier dd/MM/aaaa do GS, mantém.
-    if (typeof value === 'string' && /^\d{2}\/\d{2}\/\d{4}$/.test(value.trim())) {
-      return value.trim();
-    }
-
+    if (typeof value === 'string' && /^\d{2}\/\d{2}\/\d{4}$/.test(value.trim())) return value.trim();
     const d = new Date(value);
     if (isNaN(d.getTime())) return String(value);
-
     return d.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+  }
+
+  // ✅ Converte "Fri Feb 06..." / ISO / etc para dd/MM/aaaa
+  function formatObsDateBR(value){
+    if (!value) return '—';
+    const s = String(value).trim();
+
+    // já está dd/MM/aaaa
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(s)) return s;
+
+    // tenta parsear (Date string em inglês, ISO etc)
+    const d = new Date(s);
+    if (!isNaN(d.getTime())) {
+      return d.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+    }
+
+    // fallback (não quebra)
+    return s;
   }
 
   function escapeHtml(s){
@@ -678,6 +765,7 @@
       .replaceAll("'","&#039;");
   }
 
+  // eventos
   turmaSelect.addEventListener('change', loadAlunos);
   showInactive.addEventListener('change', loadAlunos);
   btnReload.addEventListener('click', loadAlunos);
@@ -689,9 +777,9 @@
   btnNovo.addEventListener('click', novoAluno);
   searchInput.addEventListener('input', onSearch);
 
-  // ✅ init corrigido (não trava quando a URL tá certa)
+  // init
   (async function init(){
-    if (!WEBAPP_URL || WEBAPP_URL.includes("COLE_AQUI")){
+    if (!WEBAPP_URL){
       alert("Você precisa colar a URL do WebApp na constante WEBAPP_URL do HTML.");
       return;
     }
