@@ -30,14 +30,17 @@
       color:var(--ink);
       min-height:100vh;
     }
+
     header{
       position:sticky; top:0; z-index:10;
       background:rgba(246,251,255,.85);
       backdrop-filter: blur(8px);
       border-bottom:1px solid var(--line);
     }
+
     .wrap{max-width:1200px; margin:0 auto; padding:14px 16px;}
     .top{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;}
+
     .logo{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.2px;}
     .badge{
       width:40px; height:40px; border-radius:14px;
@@ -46,6 +49,7 @@
       display:grid; place-items:center;
       color:#fff; font-size:20px;
     }
+
     .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     select, input, textarea{
       border:1px solid var(--line);
@@ -60,29 +64,41 @@
     textarea{width:100%; resize:vertical; min-height:90px; border-radius:16px;}
 
     .btn{
-      border:0; padding:10px 14px; border-radius:14px;
+      border:0;
+      padding:10px 14px;
+      border-radius:14px;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
-      color:#fff; font-weight:800; cursor:pointer; box-shadow: var(--shadow);
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: var(--shadow);
     }
     .btn.ghost{
-      background:#fff; color:var(--ink);
+      background:#fff;
+      color:var(--ink);
       border:1px solid var(--line);
       box-shadow: 0 6px 18px rgba(12,34,56,.06);
     }
     .btn.danger{background: linear-gradient(135deg, #fb7185, #ef4444);}
     .btn.ok{background: linear-gradient(135deg, #34d399, #22c55e);}
+
     .btn.small{
       padding:7px 10px;
       border-radius:12px;
-      font-weight:800;
+      font-weight:900;
       font-size:12px;
-      box-shadow: none;
+      box-shadow:none;
     }
 
     main .grid{
-      max-width:1200px; margin:0 auto; padding:16px;
-      display:grid; grid-template-columns: 420px 1fr; gap:14px;
+      max-width:1200px;
+      margin:0 auto;
+      padding:16px;
+      display:grid;
+      grid-template-columns: 420px 1fr;
+      gap:14px;
     }
+
     .card{
       background:var(--card);
       border:1px solid var(--line);
@@ -90,62 +106,113 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
+
     .card h3{
-      margin:0; padding:14px 14px 10px;
-      font-size:16px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin:0;
+      padding:14px 14px 10px;
+      font-size:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
       border-bottom:1px dashed var(--line);
       background: linear-gradient(180deg, rgba(76,201,240,.10), transparent);
     }
+
     .card .body{padding:12px 14px;}
     .muted{color:var(--muted); font-size:13px;}
+
     .list{
       display:flex; flex-direction:column; gap:8px;
       max-height:calc(100vh - 220px);
-      overflow:auto; padding-right:6px;
+      overflow:auto;
+      padding-right:6px;
     }
+
     .item{
       border:1px solid var(--line);
       border-radius:16px;
       padding:10px 12px;
-      background:#fff;
+      cursor:pointer;
+      background: #fff;
       transition: transform .06s ease, box-shadow .12s ease;
     }
-    .item.clickable{cursor:pointer;}
-    .item.clickable:hover{transform: translateY(-1px); box-shadow: 0 10px 22px rgba(12,34,56,.08);}
+    .item:hover{transform: translateY(-1px); box-shadow: 0 10px 22px rgba(12,34,56,.08);}
+
     .item .name{font-weight:900;}
     .pill{
       display:inline-flex; align-items:center; gap:6px;
-      padding:4px 10px; border-radius:999px;
-      font-size:12px; border:1px solid var(--line);
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid var(--line);
       background:rgba(12,34,56,.03);
       color:var(--muted);
       margin-top:6px;
     }
     .pill.ok{background:rgba(34,197,94,.10); color:#166534; border-color:rgba(34,197,94,.25)}
     .pill.off{background:rgba(239,68,68,.10); color:#7f1d1d; border-color:rgba(239,68,68,.25)}
-    .two{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+
+    .two{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
     @media (max-width: 980px){
-      main .grid{grid-template-columns:1fr;}
+      main .grid{grid-template-columns:1fr; }
       input{min-width: 180px;}
       .list{max-height: 320px;}
     }
 
-    .toast{
-      position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px;
-      background: rgba(12,34,56,.92);
-      color:#fff; padding:10px 14px; border-radius:14px; box-shadow: var(--shadow);
-      display:none; max-width: calc(100vw - 24px); z-index: 99; font-weight:700;
+    .kv{
+      display:grid;
+      grid-template-columns: 170px 1fr;
+      gap:8px 12px;
+      font-size:14px;
+      padding:10px 0 2px;
     }
+    .kv b{color:#0b1b2b}
+    .hr{height:1px; background:var(--line); margin:10px 0;}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .right{margin-left:auto}
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 16px;
+      background: rgba(12,34,56,.92);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:14px;
+      box-shadow: var(--shadow);
+      display:none;
+      max-width: calc(100vw - 24px);
+      z-index: 99;
+      font-weight:700;
+    }
+
     .loading{
-      display:none; position: fixed; inset: 0;
+      display:none;
+      position: fixed;
+      inset: 0;
       background: rgba(246,251,255,.65);
       backdrop-filter: blur(2px);
-      z-index: 90; align-items:center; justify-content:center; padding: 16px;
+      z-index: 90;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
     }
     .spinner{
-      background:#fff; border:1px solid var(--line);
-      border-radius: 22px; box-shadow: var(--shadow);
-      padding: 18px 16px; display:flex; align-items:center; gap:12px; font-weight:900;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px 16px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
     }
     .dot{
       width:12px; height:12px; border-radius:50%;
@@ -158,9 +225,19 @@
 
     .sectionTitle{
       margin:0 0 8px;
-      font-size:14px;
       font-weight:1000;
     }
+
+    .iconBtn{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:1000;
+      box-shadow: 0 6px 18px rgba(12,34,56,.06);
+    }
+    .iconBtn:hover{transform: translateY(-1px);}
   </style>
 </head>
 <body>
@@ -178,6 +255,7 @@
 
       <div class="controls">
         <select id="turmaSelect"></select>
+
         <input id="searchInput" placeholder="Pesquisar por nome ou número (coluna B)..." />
 
         <label class="muted" style="display:flex;gap:8px;align-items:center;user-select:none;">
@@ -221,31 +299,41 @@
 
           <div class="row">
             <div style="flex:1; min-width:260px">
-              <div class="muted" style="margin-bottom:6px">Nome do aluno</div>
-              <input id="u_nome" placeholder="Nome do aluno" style="width:100%; min-width:0" />
-              <div class="muted" style="margin-top:6px">
-                Nº: <b id="d_num">—</b> • Status: <b id="d_status">—</b>
-              </div>
+              <div style="font-size:18px;font-weight:1000" id="d_nome">—</div>
+              <div class="muted">Nº: <b id="d_num">—</b> • Status: <b id="d_status">—</b></div>
             </div>
 
-            <div class="right"></div>
+            <button class="iconBtn" id="btnEditAluno" title="Editar dados do aluno">✏️</button>
             <button class="btn ghost" id="btnInativar">Inativar</button>
           </div>
 
-          <div class="hr"></div>
-
-          <h4 class="sectionTitle">🧾 Dados do aluno (editável)</h4>
-          <div class="two">
-            <input id="u_inep" placeholder="INEP" />
-            <input id="u_cpf" placeholder="CPF" />
-            <input id="u_matricula" placeholder="Data matrícula (dd/mm/aaaa)" />
-            <input id="u_idade" placeholder="Idade" />
-            <input id="u_def" placeholder="Deficiência" />
-            <div></div>
+          <!-- VISUALIZAÇÃO (travado) -->
+          <div id="alunoView">
+            <div class="kv">
+              <b>INEP</b><span id="d_inep">—</span>
+              <b>CPF</b><span id="d_cpf">—</span>
+              <b>Data matrícula</b><span id="d_matricula">—</span>
+              <b>Idade</b><span id="d_idade">—</span>
+              <b>Deficiência</b><span id="d_def">—</span>
+            </div>
           </div>
 
-          <div class="row" style="margin-top:10px">
-            <button class="btn ok" id="btnSalvarAluno">Salvar dados do aluno</button>
+          <!-- EDIÇÃO (só aparece ao clicar no lápis) -->
+          <div id="alunoEdit" style="display:none">
+            <div class="hr"></div>
+            <h4 class="sectionTitle">✏️ Editar dados do aluno</h4>
+            <div class="two">
+              <input id="u_nome" placeholder="Nome do aluno" />
+              <input id="u_inep" placeholder="INEP" />
+              <input id="u_cpf" placeholder="CPF" />
+              <input id="u_matricula" placeholder="Data matrícula (dd/mm/aaaa)" />
+              <input id="u_idade" placeholder="Idade" />
+              <input id="u_def" placeholder="Deficiência" />
+            </div>
+            <div class="row" style="margin-top:10px">
+              <button class="btn ok" id="btnSalvarAluno">Salvar</button>
+              <button class="btn ghost" id="btnCancelarAluno">Cancelar</button>
+            </div>
           </div>
 
           <div class="hr"></div>
@@ -316,16 +404,14 @@
   const emptyState = document.getElementById('emptyState');
   const detail = document.getElementById('detail');
 
+  const d_nome = document.getElementById('d_nome');
   const d_num = document.getElementById('d_num');
   const d_status = document.getElementById('d_status');
-
-  // campos editáveis do aluno
-  const u_nome = document.getElementById('u_nome');
-  const u_inep = document.getElementById('u_inep');
-  const u_cpf = document.getElementById('u_cpf');
-  const u_matricula = document.getElementById('u_matricula');
-  const u_idade = document.getElementById('u_idade');
-  const u_def = document.getElementById('u_def');
+  const d_inep = document.getElementById('d_inep');
+  const d_cpf = document.getElementById('d_cpf');
+  const d_matricula = document.getElementById('d_matricula');
+  const d_idade = document.getElementById('d_idade');
+  const d_def = document.getElementById('d_def');
 
   const i_pai = document.getElementById('i_pai');
   const i_mae = document.getElementById('i_mae');
@@ -343,17 +429,37 @@
   const btnMover = document.getElementById('btnMover');
   const btnInativar = document.getElementById('btnInativar');
   const btnNovo = document.getElementById('btnNovo');
+
+  // edição aluno
+  const alunoView = document.getElementById('alunoView');
+  const alunoEdit = document.getElementById('alunoEdit');
+  const btnEditAluno = document.getElementById('btnEditAluno');
   const btnSalvarAluno = document.getElementById('btnSalvarAluno');
+  const btnCancelarAluno = document.getElementById('btnCancelarAluno');
+
+  const u_nome = document.getElementById('u_nome');
+  const u_inep = document.getElementById('u_inep');
+  const u_cpf = document.getElementById('u_cpf');
+  const u_matricula = document.getElementById('u_matricula');
+  const u_idade = document.getElementById('u_idade');
+  const u_def = document.getElementById('u_def');
 
   let turmas = [];
   let alunos = [];
   let currentAluno = null;
+
+  // ✅ anti-corrida de observações
+  let obsRequestToken = 0;
 
   function setLoading(v){ loading.style.display = v ? 'flex' : 'none'; }
   function notify(msg){
     toast.textContent = msg;
     toast.style.display = 'block';
     setTimeout(()=> toast.style.display = 'none', 2600);
+  }
+
+  function numKey(v){
+    return String(v ?? '').trim();
   }
 
   async function api(action, data = {}){
@@ -368,10 +474,9 @@
     });
 
     const text = await res.text();
-
     let json;
     try { json = JSON.parse(text); }
-    catch(e){ throw new Error("Resposta não é JSON. Retorno: " + text.slice(0, 200)); }
+    catch(e){ throw new Error("Resposta não é JSON. Retorno: " + text.slice(0, 220)); }
 
     if (!json.ok) throw new Error(json.error || "Erro desconhecido");
     return json;
@@ -399,7 +504,11 @@
     setLoading(true);
     try{
       const r = await api('listarAlunos', { turma, incluirInativos });
-      alunos = r.alunos || [];
+      alunos = (r.alunos || []).map(a => ({
+        ...a,
+        num: numKey(a.num),
+        numKey: numKey(a.num),
+      }));
       renderList(alunos);
       clearDetail();
     }catch(e){
@@ -418,7 +527,7 @@
     }
     for (const a of list){
       const div = document.createElement('div');
-      div.className = 'item clickable';
+      div.className = 'item';
       div.innerHTML = `
         <div class="name">${escapeHtml(a.nome || 'Sem nome')}</div>
         <div class="muted">Nº: <b>${escapeHtml(a.num)}</b></div>
@@ -434,22 +543,39 @@
   }
 
   async function openAluno(a){
-    currentAluno = a;
-    document.getElementById('currentTurma').textContent = a.turma;
+    currentAluno = {
+      ...a,
+      num: numKey(a.num),
+      numKey: numKey(a.num),
+      turma: a.turma
+    };
+
+    document.getElementById('currentTurma').textContent = currentAluno.turma;
+
+    // sai do modo edição quando troca de aluno
+    exitEditMode();
 
     emptyState.style.display = 'none';
     detail.style.display = 'block';
 
-    fillDetail(a);
+    fillDetail(currentAluno);
+
+    // ✅ carrega obs com anti-corrida
     await loadObs();
   }
 
   function fillDetail(a){
-    // número e status
+    d_nome.textContent = a.nome || '—';
     d_num.textContent = a.num || '—';
     d_status.textContent = a.status || '—';
 
-    // dados editáveis
+    d_inep.textContent = a.inep || '—';
+    d_cpf.textContent = a.cpf || '—';
+    d_matricula.textContent = formatDateBR(a.dataMatricula) || '—';
+    d_idade.textContent = a.idade || '—';
+    d_def.textContent = a.deficiencia || '—';
+
+    // edit fields (preenche pra quando clicar no lápis)
     u_nome.value = a.nome || '';
     u_inep.value = a.inep || '';
     u_cpf.value = a.cpf || '';
@@ -457,7 +583,6 @@
     u_idade.value = a.idade || '';
     u_def.value = a.deficiencia || '';
 
-    // contato
     i_pai.value = a.pai || '';
     i_mae.value = a.mae || '';
     i_tel1.value = a.tel1 || '';
@@ -466,10 +591,7 @@
     btnInativar.textContent = (a.status === 'INATIVO') ? 'Reativar' : 'Inativar';
     btnInativar.className = 'btn ' + ((a.status === 'INATIVO') ? 'ok' : 'danger');
 
-    // sugere data de hoje pro campo de observação se estiver vazio
-    if (!obsData.value.trim()){
-      obsData.value = todayBR_();
-    }
+    if (!obsData.value.trim()) obsData.value = todayBR_();
   }
 
   function clearDetail(){
@@ -479,9 +601,19 @@
     obsList.innerHTML = "";
     obsData.value = "";
     obsTexto.value = "";
+    exitEditMode();
   }
 
-  // ✅ salvar dados do aluno (nome, inep, cpf, matricula, idade, def)
+  function enterEditMode(){
+    if (!currentAluno) return;
+    alunoView.style.display = 'none';
+    alunoEdit.style.display = 'block';
+  }
+  function exitEditMode(){
+    alunoView.style.display = 'block';
+    alunoEdit.style.display = 'none';
+  }
+
   async function salvarAluno(){
     if (!currentAluno) return;
 
@@ -503,27 +635,17 @@
     try{
       await api('atualizarAluno', {
         turma: currentAluno.turma,
-        num: currentAluno.num,
+        num: currentAluno.numKey,
         dados
       });
 
       notify("Dados do aluno salvos ✅");
-
-      // atualiza localmente
-      currentAluno.nome = dados.nome;
-      currentAluno.inep = dados.inep;
-      currentAluno.cpf = dados.cpf;
-      currentAluno.dataMatricula = dados.dataMatricula;
-      currentAluno.idade = dados.idade;
-      currentAluno.deficiencia = dados.deficiencia;
-
-      // recarrega lista pra refletir nome etc
+      exitEditMode();
       await loadAlunos();
 
-      // tenta reabrir o mesmo aluno na lista carregada
-      const reopened = alunos.find(x => String(x.num) === String(currentAluno.num));
+      // reabrir o mesmo aluno
+      const reopened = alunos.find(x => numKey(x.num) === currentAluno.numKey);
       if (reopened) await openAluno(reopened);
-
     }catch(e){
       notify("Erro: " + e.message);
     }finally{
@@ -538,7 +660,7 @@
     try{
       await api('atualizarContato', {
         turma: currentAluno.turma,
-        num: currentAluno.num,
+        num: currentAluno.numKey,
         dados: {
           pai: i_pai.value.trim(),
           mae: i_mae.value.trim(),
@@ -548,7 +670,7 @@
       });
 
       notify("Contato salvo ✅");
-
+      // atualiza localmente
       currentAluno.pai = i_pai.value.trim();
       currentAluno.mae = i_mae.value.trim();
       currentAluno.tel1 = i_tel1.value.trim();
@@ -573,7 +695,7 @@
     try{
       await api('addObservacao', {
         turma: currentAluno.turma,
-        num: currentAluno.num,
+        num: currentAluno.numKey,
         dataObs,
         texto
       });
@@ -589,14 +711,24 @@
 
   async function loadObs(){
     if (!currentAluno) return;
+
+    // ✅ token anti-corrida
+    const token = ++obsRequestToken;
+    const alunoKeyNoMomento = currentAluno.numKey;
+
     setLoading(true);
     try{
-      const r = await api('listarObservacoes', { num: currentAluno.num });
+      const r = await api('listarObservacoes', { num: alunoKeyNoMomento });
+
+      // ✅ se mudou de aluno no meio do caminho, ignora
+      if (token !== obsRequestToken) return;
+      if (!currentAluno || currentAluno.numKey !== alunoKeyNoMomento) return;
+
       renderObs(r.observacoes || []);
     }catch(e){
       notify("Erro: " + e.message);
     }finally{
-      setLoading(false);
+      if (token === obsRequestToken) setLoading(false);
     }
   }
 
@@ -610,80 +742,51 @@
     for (const o of obs){
       const div = document.createElement('div');
       div.className = 'item';
+      div.style.cursor = 'default';
 
       const dataBR = formatObsDateBR(o.dataObs);
       const ts = new Date(o.timestamp || '');
 
-      const top = document.createElement('div');
-      top.className = 'name';
-      top.innerHTML = `📅 ${escapeHtml(dataBR)} <span class="muted">• ${escapeHtml(o.turma || '')}</span>`;
-
-      const txt = document.createElement('div');
-      txt.style.marginTop = '6px';
-      txt.style.fontWeight = '900';
-      txt.textContent = (o.texto || '');
-
-      const meta = document.createElement('div');
-      meta.className = 'muted';
-      meta.style.marginTop = '8px';
-      meta.style.fontSize = '12px';
-      meta.textContent = `Registrado em: ${isNaN(ts.getTime()) ? '—' : ts.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}`;
-
-      const row = document.createElement('div');
-      row.className = 'row';
-      row.style.marginTop = '10px';
-
-      const btnEdit = document.createElement('button');
-      btnEdit.className = 'btn ghost small';
-      btnEdit.textContent = '✏️ Editar';
-      btnEdit.onclick = () => editObs(o);
-
-      row.appendChild(btnEdit);
-
-      div.appendChild(top);
-      div.appendChild(txt);
-      div.appendChild(meta);
-      div.appendChild(row);
-
+      div.innerHTML = `
+        <div class="name">📅 ${escapeHtml(dataBR)} <span class="muted">• ${escapeHtml(o.turma || '')}</span></div>
+        <div style="margin-top:6px;font-weight:900">${escapeHtml(o.texto || '')}</div>
+        <div class="muted" style="margin-top:8px;font-size:12px">
+          Registrado em: ${isNaN(ts.getTime()) ? '—' : ts.toLocaleString('pt-BR', { timeZone:'America/Sao_Paulo' })}
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button class="btn ghost small" onclick="window.__editObs('${escapeHtml(o.id || '')}')">✏️ Editar</button>
+        </div>
+      `;
       obsList.appendChild(div);
     }
-  }
 
-  async function editObs(o){
-    if (!o || !o.id){
-      notify("Não achei o ID da observação para editar.");
-      return;
-    }
+    // helper global só para o onclick inline
+    window.__editObs = async (id) => {
+      const item = obs.find(x => String(x.id||'') === String(id||''));
+      if (!item) return notify("Não achei a observação para editar.");
 
-    const dataAtual = formatObsDateBR(o.dataObs);
-    const novaData = prompt("Editar data (dd/mm/aaaa):", dataAtual);
-    if (novaData === null) return;
+      const dataAtual = formatObsDateBR(item.dataObs);
+      const novaData = prompt("Editar data (dd/mm/aaaa):", dataAtual);
+      if (novaData === null) return;
 
-    const novoTexto = prompt("Editar texto da observação:", o.texto || "");
-    if (novoTexto === null) return;
+      const novoTexto = prompt("Editar texto:", item.texto || "");
+      if (novoTexto === null) return;
 
-    const d = (novaData || '').trim();
-    const t = (novoTexto || '').trim();
+      const d = (novaData||'').trim();
+      const t = (novoTexto||'').trim();
+      if (!d || !t) return notify("Data e texto não podem ficar vazios.");
 
-    if (!d || !t){
-      notify("Data e texto não podem ficar vazios.");
-      return;
-    }
-
-    setLoading(true);
-    try{
-      await api('editarObservacao', {
-        id: o.id,
-        dataObs: d,
-        texto: t
-      });
-      notify("Observação editada ✅");
-      await loadObs();
-    }catch(e){
-      notify("Erro: " + e.message);
-    }finally{
-      setLoading(false);
-    }
+      setLoading(true);
+      try{
+        await api('editarObservacao', { id: item.id, dataObs: d, texto: t });
+        notify("Observação editada ✅");
+        await loadObs();
+      }catch(e){
+        notify("Erro: " + e.message);
+      }finally{
+        setLoading(false);
+      }
+    };
   }
 
   async function mover(){
@@ -699,7 +802,7 @@
       await api('moverAluno', {
         fromTurma: currentAluno.turma,
         toTurma,
-        num: currentAluno.num
+        num: currentAluno.numKey
       });
       notify("Aluno movido ✅");
       await loadAlunos();
@@ -720,7 +823,7 @@
     try{
       await api('setStatus', {
         turma: currentAluno.turma,
-        num: currentAluno.num,
+        num: currentAluno.numKey,
         status: novo
       });
       notify("Status atualizado ✅");
@@ -756,7 +859,12 @@
       setLoading(true);
       try{
         const r = await api('buscar', { q, incluirInativos });
-        renderList(r.resultados || []);
+        const resultados = (r.resultados || []).map(a => ({
+          ...a,
+          num: numKey(a.num),
+          numKey: numKey(a.num),
+        }));
+        renderList(resultados);
       }catch(e){
         notify("Erro: " + e.message);
       }finally{
@@ -769,6 +877,8 @@
     const turma = turmaSelect.value;
     const num = prompt("Número do aluno (coluna B):");
     if (!num) return;
+
+    const numFixed = numKey(num);
     const nome = prompt("Nome do aluno:");
     if (!nome) return;
 
@@ -781,10 +891,13 @@
     try{
       await api('addAluno', {
         turma,
-        aluno: { num, nome, pai, mae, tel1, tel2 }
+        aluno: { num: numFixed, nome: nome.trim(), pai, mae, tel1, tel2 }
       });
       notify("Aluno cadastrado ✅");
       await loadAlunos();
+
+      const reopened = alunos.find(x => numKey(x.num) === numFixed);
+      if (reopened) await openAluno(reopened);
     }catch(e){
       notify("Erro: " + e.message);
     }finally{
@@ -805,9 +918,7 @@
     const s = String(value).trim();
     if (/^\d{2}\/\d{2}\/\d{4}$/.test(s)) return s;
     const d = new Date(s);
-    if (!isNaN(d.getTime())) {
-      return d.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
-    }
+    if (!isNaN(d.getTime())) return d.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
     return s;
   }
 
@@ -825,6 +936,7 @@
       .replaceAll("'","&#039;");
   }
 
+  // eventos
   turmaSelect.addEventListener('change', loadAlunos);
   showInactive.addEventListener('change', loadAlunos);
   btnReload.addEventListener('click', loadAlunos);
@@ -834,14 +946,14 @@
   btnMover.addEventListener('click', mover);
   btnInativar.addEventListener('click', toggleStatus);
   btnNovo.addEventListener('click', novoAluno);
-  btnSalvarAluno.addEventListener('click', salvarAluno);
   searchInput.addEventListener('input', onSearch);
 
+  btnEditAluno.addEventListener('click', enterEditMode);
+  btnSalvarAluno.addEventListener('click', salvarAluno);
+  btnCancelarAluno.addEventListener('click', exitEditMode);
+
+  // init
   (async function init(){
-    if (!WEBAPP_URL){
-      alert("Você precisa colar a URL do WebApp na constante WEBAPP_URL do HTML.");
-      return;
-    }
     await loadTurmas();
   })();
 </script>
